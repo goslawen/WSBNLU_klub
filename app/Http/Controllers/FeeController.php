@@ -61,7 +61,7 @@ class FeeController extends Controller
 
     public function update(Request $request, Fee $fee): RedirectResponse
     {
-        $data = $request->validate($this->rules());
+        $data = $request->validate($this->rules($fee));
 
         $fee->update($data);
 
@@ -91,11 +91,63 @@ class FeeController extends Controller
             ->with('success', 'Składka została oznaczona jako opłacona.');
     }
 
-    private function rules(): array
+    public function generateForm(): View
+    {
+        return view('fees.generate');
+    }
+
+    public function generate(Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'year' => ['required', 'integer', 'min:2000', 'max:2100'],
+            'amount' => ['required', 'numeric', 'min:0'],
+        ]);
+
+        $created = 0;
+        $skipped = 0;
+
+        $members = Member::query()
+            ->where('status', 'active')
+            ->get();
+
+        foreach ($members as $member) {
+            $exists = Fee::query()
+                ->where('member_id', $member->id)
+                ->where('year', $data['year'])
+                ->exists();
+
+            if ($exists) {
+                $skipped++;
+                continue;
+            }
+
+            Fee::create([
+                'member_id' => $member->id,
+                'year' => $data['year'],
+                'amount' => $data['amount'],
+                'status' => 'unpaid',
+                'paid_at' => null,
+            ]);
+
+            $created++;
+        }
+
+        return redirect()
+            ->route('fees.index')
+            ->with('success', "Wygenerowano składki: {$created}. Pominięto istniejące: {$skipped}.");
+    }
+
+    private function rules(?Fee $fee = null): array
     {
         return [
             'member_id' => ['required', Rule::exists('members', 'id')],
-            'year' => ['required', 'integer'],
+            'year' => [
+                'required',
+                'integer',
+                Rule::unique('fees')
+                    ->where('member_id', request('member_id'))
+                    ->ignore($fee?->id),
+            ],
             'amount' => ['required', 'numeric', 'min:0'],
             'status' => ['required', Rule::in(['unpaid', 'paid', 'cancelled'])],
             'paid_at' => ['nullable', 'date'],

@@ -40,7 +40,7 @@
             <select name="status" id="status" class="form-select @error('status') is-invalid @enderror">
                 <option value="unpaid" @selected(old('status', 'unpaid') === 'unpaid')>nieopłacona</option>
                 <option value="paid" @selected(old('status') === 'paid')>opłacona</option>
-                <option value="cancelled" @selected(old('status') === 'cancelled')>anulowane</option>
+                <option value="cancelled" @selected(old('status') === 'cancelled')>anulowana</option>
             </select>
             @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>

@@ -1,4 +1,16 @@
 @php
+    $statusColors = [
+        'active' => 'success',
+        'inactive' => 'secondary',
+        'available' => 'success',
+        'assigned' => 'primary',
+        'planned' => 'primary',
+        'completed' => 'success',
+        'cancelled' => 'secondary',
+        'unpaid' => 'warning',
+        'paid' => 'success',
+    ];
+
     $statusLabels = [
         'active' => 'aktywny',
         'inactive' => 'nieaktywny',
@@ -11,19 +23,9 @@
         'paid' => 'opłacona',
     ];
 
-    $statusClasses = [
-        'active' => 'success',
-        'inactive' => 'secondary',
-        'available' => 'success',
-        'assigned' => 'primary',
-        'planned' => 'info',
-        'completed' => 'success',
-        'cancelled' => 'secondary',
-        'unpaid' => 'warning',
-        'paid' => 'success',
-    ];
+    $statusLabels = array_replace($statusLabels, $labels ?? []);
 @endphp
 
-<span class="badge text-bg-{{ $statusClasses[$status] ?? 'secondary' }}">
+<span class="badge bg-{{ $statusColors[$status] ?? 'secondary' }}">
     {{ $statusLabels[$status] ?? $status }}
 </span>

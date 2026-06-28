@@ -101,14 +101,114 @@ class FeeTest extends TestCase
         ]);
     }
 
-    private function createMember(): Member
+    public function test_fee_generation_form_works(): void
     {
+        $response = $this->get(route('fees.generate-form'));
+
+        $response->assertOk();
+        $response->assertSee('Wygeneruj składki roczne');
+    }
+
+    public function test_yearly_fees_can_be_generated_for_active_members(): void
+    {
+        $firstMember = $this->createMember('jan.generate@example.com');
+        $secondMember = $this->createMember('anna.generate@example.com', 'Anna', 'Nowak');
+
+        $response = $this->post(route('fees.generate'), [
+            'year' => 2027,
+            'amount' => 240,
+        ]);
+
+        $response->assertRedirect(route('fees.index'));
+        $response->assertSessionHas('success', 'Wygenerowano składki: 2. Pominięto istniejące: 0.');
+        $this->assertDatabaseHas('fees', [
+            'member_id' => $firstMember->id,
+            'year' => 2027,
+            'amount' => 240,
+            'status' => 'unpaid',
+            'paid_at' => null,
+        ]);
+        $this->assertDatabaseHas('fees', [
+            'member_id' => $secondMember->id,
+            'year' => 2027,
+            'amount' => 240,
+            'status' => 'unpaid',
+            'paid_at' => null,
+        ]);
+    }
+
+    public function test_yearly_fees_are_not_generated_for_inactive_members(): void
+    {
+        $activeMember = $this->createMember('aktywny.generate@example.com');
+        $inactiveMember = $this->createMember('nieaktywny.generate@example.com', 'Tomasz', 'Wójcik', 'inactive');
+
+        $this->post(route('fees.generate'), [
+            'year' => 2027,
+            'amount' => 240,
+        ]);
+
+        $this->assertDatabaseHas('fees', [
+            'member_id' => $activeMember->id,
+            'year' => 2027,
+        ]);
+        $this->assertDatabaseMissing('fees', [
+            'member_id' => $inactiveMember->id,
+            'year' => 2027,
+        ]);
+    }
+
+    public function test_yearly_fee_generation_does_not_create_duplicates(): void
+    {
+        $member = $this->createMember('duplikat.generate@example.com');
+        Fee::create([
+            'member_id' => $member->id,
+            'year' => 2027,
+            'amount' => 200,
+            'status' => 'unpaid',
+        ]);
+
+        $response = $this->post(route('fees.generate'), [
+            'year' => 2027,
+            'amount' => 240,
+        ]);
+
+        $response->assertRedirect(route('fees.index'));
+        $response->assertSessionHas('success', 'Wygenerowano składki: 0. Pominięto istniejące: 1.');
+        $this->assertSame(1, Fee::where('member_id', $member->id)->where('year', 2027)->count());
+    }
+
+    public function test_negative_amount_is_rejected_for_yearly_fee_generation(): void
+    {
+        $response = $this->post(route('fees.generate'), [
+            'year' => 2027,
+            'amount' => -1,
+        ]);
+
+        $response->assertSessionHasErrors(['amount']);
+    }
+
+    public function test_year_before_2000_is_rejected_for_yearly_fee_generation(): void
+    {
+        $response = $this->post(route('fees.generate'), [
+            'year' => 1999,
+            'amount' => 240,
+        ]);
+
+        $response->assertSessionHasErrors(['year']);
+    }
+
+    private function createMember(
+        string $email = 'jan.fee@example.com',
+        string $firstName = 'Jan',
+        string $lastName = 'Kowalski',
+        string $status = 'active'
+    ): Member {
         return Member::create([
-            'first_name' => 'Jan',
-            'last_name' => 'Kowalski',
-            'email' => 'jan.fee@example.com',
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'email' => $email,
             'joined_at' => '2026-01-01',
-            'status' => 'active',
+            'status' => $status,
         ]);
     }
 
