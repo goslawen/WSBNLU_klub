@@ -57,6 +57,18 @@ class EventTest extends TestCase
         $response->assertSessionHasErrors(['name']);
     }
 
+
+    public function test_event_date_before_2000_is_rejected(): void
+    {
+        $response = $this->post(route('events.store'), [
+            'name' => 'Stare wydarzenie',
+            'event_date' => '1999-12-31',
+            'location' => 'Strzelnica 50 m',
+            'status' => 'planned',
+        ]);
+
+        $response->assertSessionHasErrors(['event_date']);
+    }
     public function test_member_can_be_attached_to_event(): void
     {
         $event = $this->createEvent();
