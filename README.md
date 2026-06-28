@@ -47,6 +47,10 @@ Projekt nie używa React, Vue, Inertia, API, logowania, ról, płatności online
 - `weapons` → `weapon_types`: jeden egzemplarz broni należy do jednego typu broni.
 - `members` ↔ `events`: członkowie i wydarzenia są połączeni relacją wiele-do-wielu przez tabelę `event_member`.
 
+## Dokumentacja techniczna
+
+Szczegółowy opis schematu bazy, relacji i operacji CRUD znajduje się w pliku [docs/SCHEMA.md](docs/SCHEMA.md).
+
 ## Uruchomienie projektu
 
 ```bash
