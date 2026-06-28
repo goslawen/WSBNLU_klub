@@ -65,8 +65,8 @@ class ProjectRequirementsTest extends TestCase
 
     public function test_members_search_works(): void
     {
-        $this->createMember('Maria', 'Wisniewska', 'maria.requirements@example.com');
-        $this->createMember('Piotr', 'Zielinski', 'piotr.requirements@example.com');
+        $this->createMember('Maria', 'Wiśniewska', 'maria.requirements@example.com');
+        $this->createMember('Piotr', 'Zieliński', 'piotr.requirements@example.com');
 
         $response = $this->get(route('members.index', ['search' => 'Maria']));
 

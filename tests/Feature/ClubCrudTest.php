@@ -72,8 +72,8 @@ class ClubCrudTest extends TestCase
 
     public function test_members_search_works(): void
     {
-        $this->createMember('maria@example.com', 'Maria', 'Wisniewska');
-        $this->createMember('piotr@example.com', 'Piotr', 'Zielinski');
+        $this->createMember('maria@example.com', 'Maria', 'Wiśniewska');
+        $this->createMember('piotr@example.com', 'Piotr', 'Zieliński');
 
         $response = $this->get(route('members.index', ['search' => 'Maria']));
 
@@ -109,7 +109,7 @@ class ClubCrudTest extends TestCase
     {
         $response = $this->post(route('weapon-types.store'), [
             'name' => 'Karabin',
-            'description' => 'Bron dluga do ewidencji klubowej.',
+            'description' => 'Broń długa do ewidencji klubowej.',
         ]);
 
         $weaponType = WeaponType::where('name', 'Karabin')->first();
@@ -125,7 +125,7 @@ class ClubCrudTest extends TestCase
     {
         $response = $this->post(route('weapon-types.store'), [
             'name' => 'AK',
-            'description' => 'Za krotka nazwa.',
+            'description' => 'Za krótka nazwa.',
         ]);
 
         $response->assertSessionHasErrors(['name']);
@@ -192,7 +192,7 @@ class ClubCrudTest extends TestCase
             'name' => 'Trening klubowy',
             'event_date' => '2026-02-15',
             'location' => 'Strzelnica miejska',
-            'description' => 'Trening dla czlonkow klubu.',
+            'description' => 'Trening dla członków klubu.',
             'status' => 'planned',
         ]);
 
@@ -357,7 +357,7 @@ class ClubCrudTest extends TestCase
     {
         return WeaponType::create([
             'name' => $name,
-            'description' => 'Typ broni do testow.',
+            'description' => 'Typ broni do testów.',
         ]);
     }
 
@@ -365,7 +365,7 @@ class ClubCrudTest extends TestCase
     {
         return Weapon::create([
             'weapon_type_id' => $this->createWeaponType()->id,
-            'name' => 'Bron testowa',
+            'name' => 'Broń testowa',
             'caliber' => '9x19 mm',
             'serial_number' => $serialNumber,
             'status' => 'available',
@@ -378,7 +378,7 @@ class ClubCrudTest extends TestCase
             'name' => 'Wydarzenie testowe',
             'event_date' => '2026-03-20',
             'location' => 'Strzelnica testowa',
-            'description' => 'Wydarzenie do testow.',
+            'description' => 'Wydarzenie do testów.',
             'status' => 'planned',
         ]);
     }

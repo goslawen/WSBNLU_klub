@@ -65,7 +65,7 @@ class MemberTest extends TestCase
     {
         Member::create([
             'first_name' => 'Maria',
-            'last_name' => 'Wisniewska',
+            'last_name' => 'Wiśniewska',
             'email' => 'maria@example.com',
             'joined_at' => '2026-01-01',
             'status' => 'active',
@@ -73,7 +73,7 @@ class MemberTest extends TestCase
 
         Member::create([
             'first_name' => 'Piotr',
-            'last_name' => 'Zielinski',
+            'last_name' => 'Zieliński',
             'email' => 'piotr@example.com',
             'joined_at' => '2026-01-01',
             'status' => 'active',
@@ -90,7 +90,7 @@ class MemberTest extends TestCase
     {
         $member = Member::create([
             'first_name' => 'Tomasz',
-            'last_name' => 'Wojcik',
+            'last_name' => 'Wójcik',
             'email' => 'tomasz@example.com',
             'joined_at' => '2026-01-01',
             'status' => 'active',
