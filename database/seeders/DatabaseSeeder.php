@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'first_name' => 'Piotr',
-                'last_name' => 'Zielinski',
+                'last_name' => 'Zieliński',
                 'email' => 'piotr.zielinski@example.com',
                 'phone' => '502300400',
                 'joined_at' => '2020-09-01',
@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'first_name' => 'Maria',
-                'last_name' => 'Wisniewska',
+                'last_name' => 'Wiśniewska',
                 'email' => 'maria.wisniewska@example.com',
                 'phone' => '503400500',
                 'joined_at' => '2023-01-20',
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'first_name' => 'Tomasz',
-                'last_name' => 'Wojcik',
+                'last_name' => 'Wójcik',
                 'email' => 'tomasz.wojcik@example.com',
                 'phone' => null,
                 'joined_at' => '2019-11-05',
@@ -62,15 +62,15 @@ class DatabaseSeeder extends Seeder
         $weaponTypes = collect([
             [
                 'name' => 'Pistolet sportowy',
-                'description' => 'Bron krotka uzywana do treningu strzeleckiego.',
+                'description' => 'Broń krótka używana do treningu strzeleckiego.',
             ],
             [
-                'name' => 'Karabin bocznego zaplonu',
-                'description' => 'Karabin sportowy do strzelania na dystansie 50 metrow.',
+                'name' => 'Karabin bocznego zapłonu',
+                'description' => 'Karabin sportowy do strzelania na dystansie 50 metrów.',
             ],
             [
-                'name' => 'Strzelba gladkolufowa',
-                'description' => 'Bron przeznaczona do konkurencji dynamicznych i treningu.',
+                'name' => 'Strzelba gładkolufowa',
+                'description' => 'Broń przeznaczona do konkurencji dynamicznych i treningu.',
             ],
         ])->map(fn (array $data) => WeaponType::create($data));
 
