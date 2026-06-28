@@ -3,42 +3,81 @@
 namespace App\Http\Controllers;
 
 use App\Models\WeaponType;
-use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 
 class WeaponTypeController extends Controller
 {
-    public function index(): Response
+    public function index(): View
     {
-        return response('Lista typĂłw broni');
+        $weaponTypes = WeaponType::query()
+            ->orderBy('name')
+            ->get();
+
+        return view('weapon-types.index', [
+            'weaponTypes' => $weaponTypes,
+        ]);
     }
 
-    public function create(): Response
+    public function create(): View
     {
-        return response('Formularz dodawania typu broni');
+        return view('weapon-types.create');
     }
 
-    public function store(): Response
+    public function store(Request $request): RedirectResponse
     {
-        return response('Zapis typu broni');
+        $data = $request->validate($this->rules());
+
+        $weaponType = WeaponType::create($data);
+
+        return redirect()
+            ->route('weapon-types.show', $weaponType)
+            ->with('success', 'Typ broni został dodany.');
     }
 
-    public function show(WeaponType $weapon_type): Response
+    public function show(WeaponType $weapon_type): View
     {
-        return response('SzczegĂłĹ‚y typu broni: '.$weapon_type->name);
+        $weapon_type->load('weapons');
+
+        return view('weapon-types.show', [
+            'weaponType' => $weapon_type,
+        ]);
     }
 
-    public function edit(WeaponType $weapon_type): Response
+    public function edit(WeaponType $weapon_type): View
     {
-        return response('Edycja typu broni: '.$weapon_type->name);
+        return view('weapon-types.edit', [
+            'weaponType' => $weapon_type,
+        ]);
     }
 
-    public function update(WeaponType $weapon_type): Response
+    public function update(Request $request, WeaponType $weapon_type): RedirectResponse
     {
-        return response('Aktualizacja typu broni');
+        $data = $request->validate($this->rules($weapon_type));
+
+        $weapon_type->update($data);
+
+        return redirect()
+            ->route('weapon-types.show', $weapon_type)
+            ->with('success', 'Typ broni został zaktualizowany.');
     }
 
-    public function destroy(WeaponType $weapon_type): Response
+    public function destroy(WeaponType $weapon_type): RedirectResponse
     {
-        return response('Usuwanie typu broni');
+        $weapon_type->delete();
+
+        return redirect()
+            ->route('weapon-types.index')
+            ->with('success', 'Typ broni został usunięty.');
+    }
+
+    private function rules(?WeaponType $weaponType = null): array
+    {
+        return [
+            'name' => ['required', 'string', 'min:3', Rule::unique('weapon_types')->ignore($weaponType?->id)],
+            'description' => ['nullable', 'string'],
+        ];
     }
 }
