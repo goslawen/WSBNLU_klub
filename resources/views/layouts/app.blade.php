@@ -6,7 +6,7 @@
     <title>@yield('title', 'WSBNLU Klub')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="min-vh-100 d-flex flex-column">
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">WSBNLU Klub</a>
@@ -27,7 +27,7 @@
         </div>
     </nav>
 
-    <main class="container py-4">
+    <main class="container py-4 flex-grow-1">
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
@@ -35,6 +35,11 @@
         @yield('content')
     </main>
 
+    <footer class="bg-light border-top text-muted py-3 mt-auto">
+        <div class="container small">
+            Projekt: Programowanie zaawansowanych serwisów internetowych | Student: Wojciech Gosiewski | Prowadząca: Jolanta Klima-Gnojnicka
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
