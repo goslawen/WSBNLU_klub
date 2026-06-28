@@ -3,46 +3,80 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fee;
+use App\Models\Member;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 
 class FeeController extends Controller
 {
-    public function index(): Response
+    public function index(): View
     {
-        return response('Lista składek');
+        $fees = Fee::query()
+            ->with('member')
+            ->orderByDesc('year')
+            ->orderBy('status')
+            ->get();
+
+        return view('fees.index', [
+            'fees' => $fees,
+        ]);
     }
 
-    public function create(): Response
+    public function create(): View
     {
-        return response('Formularz dodawania składki');
+        return view('fees.create', [
+            'members' => $this->membersForSelect(),
+        ]);
     }
 
-    public function store(): Response
+    public function store(Request $request): RedirectResponse
     {
-        return response('Zapis składki');
+        $data = $request->validate($this->rules());
+
+        $fee = Fee::create($data);
+
+        return redirect()
+            ->route('fees.show', $fee)
+            ->with('success', 'Składka została dodana.');
     }
 
-    public function show(Fee $fee): Response
+    public function show(Fee $fee): View
     {
-        return response('Szczegóły składki: '.$fee->year);
+        $fee->load('member');
+
+        return view('fees.show', [
+            'fee' => $fee,
+        ]);
     }
 
-    public function edit(Fee $fee): Response
+    public function edit(Fee $fee): View
     {
-        return response('Edycja składki: '.$fee->year);
+        return view('fees.edit', [
+            'fee' => $fee,
+            'members' => $this->membersForSelect(),
+        ]);
     }
 
-    public function update(Fee $fee): Response
+    public function update(Request $request, Fee $fee): RedirectResponse
     {
-        return response('Aktualizacja składki');
+        $data = $request->validate($this->rules());
+
+        $fee->update($data);
+
+        return redirect()
+            ->route('fees.show', $fee)
+            ->with('success', 'Składka została zaktualizowana.');
     }
 
     public function destroy(Fee $fee): RedirectResponse
     {
         $fee->update(['status' => 'cancelled']);
 
-        return redirect()->route('fees.index');
+        return redirect()
+            ->route('fees.index')
+            ->with('success', 'Składka została anulowana.');
     }
 
     public function markPaid(Fee $fee): RedirectResponse
@@ -52,6 +86,27 @@ class FeeController extends Controller
             'paid_at' => now(),
         ]);
 
-        return redirect()->route('fees.index');
+        return redirect()
+            ->route('fees.index')
+            ->with('success', 'Składka została oznaczona jako opłacona.');
+    }
+
+    private function rules(): array
+    {
+        return [
+            'member_id' => ['required', Rule::exists('members', 'id')],
+            'year' => ['required', 'integer'],
+            'amount' => ['required', 'numeric', 'min:0'],
+            'status' => ['required', Rule::in(['unpaid', 'paid', 'cancelled'])],
+            'paid_at' => ['nullable', 'date'],
+        ];
+    }
+
+    private function membersForSelect()
+    {
+        return Member::query()
+            ->orderBy('last_name')
+            ->orderBy('first_name')
+            ->get();
     }
 }
