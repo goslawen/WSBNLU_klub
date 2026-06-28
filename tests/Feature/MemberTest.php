@@ -25,6 +25,7 @@ class MemberTest extends TestCase
         $response->assertOk();
         $response->assertSee('Jan');
         $response->assertSee('Kowalski');
+        $response->assertSee('01.01.2026');
     }
 
     public function test_member_can_be_created(): void

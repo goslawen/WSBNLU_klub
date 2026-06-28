@@ -22,7 +22,7 @@
                 @forelse ($events as $event)
                     <tr>
                         <td>{{ $event->name }}</td>
-                        <td>{{ $event->event_date->format('Y-m-d') }}</td>
+                        <td>{{ $event->event_date->format('d.m.Y') }}</td>
                         <td>{{ $event->location }}</td>
                         <td>@include('partials.status-badge', ['status' => $event->status])</td>
                         <td class="text-end">

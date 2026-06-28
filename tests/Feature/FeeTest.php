@@ -18,7 +18,8 @@ class FeeTest extends TestCase
             'member_id' => $member->id,
             'year' => 2026,
             'amount' => 240.00,
-            'status' => 'unpaid',
+            'status' => 'paid',
+            'paid_at' => '2026-02-15',
         ]);
 
         $response = $this->get(route('fees.index'));
@@ -26,6 +27,7 @@ class FeeTest extends TestCase
         $response->assertOk();
         $response->assertSee('240,00');
         $response->assertSee('Kowalski');
+        $response->assertSee('15.02.2026');
     }
 
     public function test_fee_can_be_created(): void

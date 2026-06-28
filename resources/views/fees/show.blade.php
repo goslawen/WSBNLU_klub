@@ -25,7 +25,7 @@
         <dd class="col-sm-9">@include('partials.status-badge', ['status' => $fee->status, 'labels' => ['cancelled' => 'anulowana']])</dd>
 
         <dt class="col-sm-3">Data opłacenia</dt>
-        <dd class="col-sm-9">{{ $fee->paid_at?->format('Y-m-d') ?: '-' }}</dd>
+        <dd class="col-sm-9">{{ $fee->paid_at ? $fee->paid_at->format('d.m.Y') : '-' }}</dd>
     </dl>
 
     <div class="d-flex gap-2">

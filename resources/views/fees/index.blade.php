@@ -30,7 +30,7 @@
                         <td>{{ $fee->year }}</td>
                         <td>{{ number_format((float) $fee->amount, 2, ',', ' ') }} zł</td>
                         <td>@include('partials.status-badge', ['status' => $fee->status, 'labels' => ['cancelled' => 'anulowana']])</td>
-                        <td>{{ $fee->paid_at?->format('Y-m-d') ?: '-' }}</td>
+                        <td>{{ $fee->paid_at ? $fee->paid_at->format('d.m.Y') : '-' }}</td>
                         <td class="text-end">
                             <a href="{{ route('fees.show', $fee) }}" class="btn btn-sm btn-outline-secondary">Pokaż</a>
                             <a href="{{ route('fees.edit', $fee) }}" class="btn btn-sm btn-outline-primary">Edytuj</a>

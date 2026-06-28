@@ -37,7 +37,7 @@
                         <td>{{ $member->last_name }}</td>
                         <td>{{ $member->email }}</td>
                         <td>{{ $member->phone ?: '-' }}</td>
-                        <td>{{ $member->joined_at->format('Y-m-d') }}</td>
+                        <td>{{ $member->joined_at->format('d.m.Y') }}</td>
                         <td>@include('partials.status-badge', ['status' => $member->status])</td>
                         <td class="text-end">
                             <a href="{{ route('members.show', $member) }}" class="btn btn-sm btn-outline-secondary">Pokaż</a>
