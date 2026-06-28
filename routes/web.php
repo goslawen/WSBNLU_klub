@@ -15,6 +15,8 @@ Route::resource('members', MemberController::class);
 Route::resource('weapon-types', WeaponTypeController::class);
 Route::resource('weapons', WeaponController::class);
 Route::resource('events', EventController::class);
+Route::get('/fees/generate', [FeeController::class, 'generateForm'])->name('fees.generate-form');
+Route::post('/fees/generate', [FeeController::class, 'generate'])->name('fees.generate');
 Route::resource('fees', FeeController::class);
 
 Route::post('/events/{event}/members', [EventMemberController::class, 'store'])->name('events.members.store');

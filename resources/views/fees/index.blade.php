@@ -5,9 +5,13 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h3 mb-0">Składki</h1>
-        <a href="{{ route('fees.create') }}" class="btn btn-primary">Dodaj</a>
+        <div class="d-flex gap-2">
+            <a href="{{ route('fees.generate-form') }}" class="btn btn-outline-primary">Wygeneruj składki roczne</a>
+            <a href="{{ route('fees.create') }}" class="btn btn-primary">Dodaj</a>
+        </div>
     </div>
-<div class="table-responsive">
+
+    <div class="table-responsive">
         <table class="table table-striped align-middle">
             <thead>
                 <tr>
@@ -25,7 +29,7 @@
                         <td>{{ $fee->member->first_name }} {{ $fee->member->last_name }}</td>
                         <td>{{ $fee->year }}</td>
                         <td>{{ number_format((float) $fee->amount, 2, ',', ' ') }} zł</td>
-                        <td>@include('partials.status-badge', ['status' => $fee->status])</td>
+                        <td>@include('partials.status-badge', ['status' => $fee->status, 'labels' => ['cancelled' => 'anulowana']])</td>
                         <td>{{ $fee->paid_at?->format('Y-m-d') ?: '-' }}</td>
                         <td class="text-end">
                             <a href="{{ route('fees.show', $fee) }}" class="btn btn-sm btn-outline-secondary">Pokaż</a>
@@ -48,7 +52,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center text-muted">Brak składek do wyświetlenia.</td>
+                        <td colspan="6" class="text-center text-muted">Brak składek.</td>
                     </tr>
                 @endforelse
             </tbody>

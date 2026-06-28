@@ -22,7 +22,7 @@
         <dd class="col-sm-9">{{ number_format((float) $fee->amount, 2, ',', ' ') }} zł</dd>
 
         <dt class="col-sm-3">Status</dt>
-        <dd class="col-sm-9">@include('partials.status-badge', ['status' => $fee->status])</dd>
+        <dd class="col-sm-9">@include('partials.status-badge', ['status' => $fee->status, 'labels' => ['cancelled' => 'anulowana']])</dd>
 
         <dt class="col-sm-3">Data opłacenia</dt>
         <dd class="col-sm-9">{{ $fee->paid_at?->format('Y-m-d') ?: '-' }}</dd>
