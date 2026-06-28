@@ -38,8 +38,8 @@
 
     <h2 class="h5 mt-4">Uczestnicy</h2>
 
-    @if ($errors->has('member_id'))
-        <div class="alert alert-danger">{{ $errors->first('member_id') }}</div>
+    @if ($errors->any())
+        <div class="alert alert-danger">Formularz zawiera błędy. Popraw oznaczone pola.</div>
     @endif
 
     <form method="POST" action="{{ route('events.members.store', $event) }}" class="row g-2 mb-3">
