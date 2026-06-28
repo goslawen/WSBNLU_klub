@@ -47,7 +47,7 @@
             <select name="status" id="status" class="form-select @error('status') is-invalid @enderror">
                 <option value="available" @selected(old('status', $weapon->status) === 'available')>dostępna</option>
                 <option value="assigned" @selected(old('status', $weapon->status) === 'assigned')>przypisana</option>
-                <option value="inactive" @selected(old('status', $weapon->status) === 'inactive')>nieaktywna</option>
+                <option value="inactive" @selected(old('status', $weapon->status) === 'inactive')>nieaktywny</option>
             </select>
             @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>

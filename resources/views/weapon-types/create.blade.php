@@ -3,7 +3,7 @@
 @section('title', 'Dodaj typ broni - WSBNLU Klub')
 
 @section('content')
-    <h1 class="h3 mb-3">Dodaj</h1>
+    <h1 class="h3 mb-3">Dodaj typ broni</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">Popraw błędy w formularzu.</div>

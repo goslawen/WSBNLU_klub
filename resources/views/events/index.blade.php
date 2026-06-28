@@ -24,7 +24,7 @@
                         <td>{{ $event->name }}</td>
                         <td>{{ $event->event_date->format('Y-m-d') }}</td>
                         <td>{{ $event->location }}</td>
-                        <td>{{ $event->status }}</td>
+                        <td>@include('partials.status-badge', ['status' => $event->status])</td>
                         <td class="text-end">
                             <a href="{{ route('events.show', $event) }}" class="btn btn-sm btn-outline-secondary">Pokaż</a>
                             <a href="{{ route('events.edit', $event) }}" class="btn btn-sm btn-outline-primary">Edytuj</a>

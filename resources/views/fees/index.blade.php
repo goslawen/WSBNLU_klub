@@ -25,7 +25,7 @@
                         <td>{{ $fee->member->first_name }} {{ $fee->member->last_name }}</td>
                         <td>{{ $fee->year }}</td>
                         <td>{{ number_format((float) $fee->amount, 2, ',', ' ') }} zł</td>
-                        <td>{{ $fee->status }}</td>
+                        <td>@include('partials.status-badge', ['status' => $fee->status])</td>
                         <td>{{ $fee->paid_at?->format('Y-m-d') ?: '-' }}</td>
                         <td class="text-end">
                             <a href="{{ route('fees.show', $fee) }}" class="btn btn-sm btn-outline-secondary">Pokaż</a>

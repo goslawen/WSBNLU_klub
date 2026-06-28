@@ -26,7 +26,7 @@
                         <td>{{ $weapon->weaponType->name }}</td>
                         <td>{{ $weapon->caliber }}</td>
                         <td>{{ $weapon->serial_number }}</td>
-                        <td>{{ $weapon->status }}</td>
+                        <td>@include('partials.status-badge', ['status' => $weapon->status])</td>
                         <td class="text-end">
                             <a href="{{ route('weapons.show', $weapon) }}" class="btn btn-sm btn-outline-secondary">Pokaż</a>
                             <a href="{{ route('weapons.edit', $weapon) }}" class="btn btn-sm btn-outline-primary">Edytuj</a>
