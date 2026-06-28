@@ -1,8 +1,16 @@
 # WSBNLU_klub — aplikacja do zarządzania klubem strzelecko-kolekcjonerskim
 
+## Właściwy branch projektu
+
+Kod do oceny znajduje się na branchu `main`.
+
+Starsze branche `feature/*` są historią pracy nad projektem i nie powinny być oceniane jako aktualna wersja aplikacji.
+
 ## Opis projektu
 
 WSBNLU_klub to prosty projekt akademicki wykonany w Laravelu. Aplikacja służy do podstawowego zarządzania klubem strzelecko-kolekcjonerskim.
+
+## Technologia
 
 Projekt wykorzystuje:
 
