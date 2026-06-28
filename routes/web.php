@@ -10,6 +10,7 @@ use App\Http\Controllers\WeaponTypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::view('/project-map', 'project-map')->name('project-map');
 
 Route::resource('members', MemberController::class);
 Route::resource('weapon-types', WeaponTypeController::class);

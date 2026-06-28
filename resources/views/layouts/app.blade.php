@@ -21,6 +21,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('weapons.index') }}">Broń</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('events.index') }}">Wydarzenia</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('fees.index') }}">Składki</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('project-map') }}">Mapa projektu</a></li>
                 </ul>
             </div>
         </div>
