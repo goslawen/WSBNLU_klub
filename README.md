@@ -1,59 +1,132 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# WSBNLU_klub — aplikacja do zarządzania klubem strzelecko-kolekcjonerskim
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Opis projektu
 
-## About Laravel
+WSBNLU_klub to prosty projekt akademicki wykonany w Laravelu. Aplikacja służy do podstawowego zarządzania klubem strzelecko-kolekcjonerskim.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Projekt wykorzystuje:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Laravel,
+- Blade,
+- SQLite,
+- klasyczne kontrolery resource,
+- klasyczne formularze HTML,
+- prosty Bootstrap 5 z CDN,
+- prosty CRUD dla głównych tabel.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Projekt nie używa React, Vue, Inertia, API, logowania, ról, płatności online, PDF ani kolejek.
 
-## Learning Laravel
+## Spełnione wymagania
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- Projekt działa w Laravelu.
+- Widoki są wykonane w Blade.
+- Baza danych działa na SQLite.
+- Projekt ma więcej niż 5 tabel.
+- Projekt używa kluczy obcych.
+- Projekt ma tabele główne i tabelę pośrednią.
+- Projekt ma CRUD dla członków, typów broni, broni, wydarzeń i składek.
+- Projekt ma wyszukiwanie członków po imieniu, nazwisku i e-mailu.
+- Projekt ma walidację pól wymaganych.
+- Projekt ma dodatkową walidację kwoty składki: `amount >= 0`.
+- Projekt ma relację wiele-do-wielu między członkami i wydarzeniami przez `event_member`.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Tabele
 
-## Laravel Sponsors
+- `members` — członkowie klubu,
+- `weapon_types` — typy broni,
+- `weapons` — ewidencja broni,
+- `events` — wydarzenia klubowe,
+- `event_member` — tabela pośrednia uczestników wydarzeń,
+- `fees` — składki członkowskie.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Relacje
 
-### Premium Partners
+- `members` → `fees`: jeden członek może mieć wiele składek.
+- `fees` → `members`: jedna składka należy do jednego członka.
+- `weapon_types` → `weapons`: jeden typ broni może mieć wiele egzemplarzy broni.
+- `weapons` → `weapon_types`: jeden egzemplarz broni należy do jednego typu broni.
+- `members` ↔ `events`: członkowie i wydarzenia są połączeni relacją wiele-do-wielu przez tabelę `event_member`.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Uruchomienie projektu
 
-## Contributing
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate:fresh --seed
+php artisan serve
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Po uruchomieniu aplikacja jest dostępna domyślnie pod adresem:
 
-## Code of Conduct
+```text
+http://127.0.0.1:8000
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Na Windows, jeżeli polecenie `touch` nie jest dostępne, można utworzyć plik SQLite ręcznie:
 
-## Security Vulnerabilities
+```powershell
+New-Item -ItemType File database/database.sqlite
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Testy
 
-## License
+Uruchomienie testów:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan test
+```
+
+Pełne odtworzenie bazy z danymi przykładowymi:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+## Dane przykładowe
+
+Seedery dodają przykładowe dane po polsku:
+
+- 5 członków,
+- 3 typy broni,
+- 5 egzemplarzy broni,
+- 3 wydarzenia,
+- 6 składek,
+- kilka przypisań członków do wydarzeń.
+
+## Scenariusz obrony
+
+1. Uruchomić aplikację poleceniem:
+
+```bash
+php artisan serve
+```
+
+2. Otworzyć stronę główną i pokazać opis projektu.
+3. Pokazać menu aplikacji: członkowie, typy broni, broń, wydarzenia, składki.
+4. Pokazać migracje w katalogu `database/migrations`.
+5. Omówić tabele i klucze obce:
+   - `weapons.weapon_type_id`,
+   - `fees.member_id`,
+   - `event_member.event_id`,
+   - `event_member.member_id`.
+6. Pokazać tabelę `members` i listę członków w aplikacji.
+7. Dodać nowego członka przez formularz.
+8. Wyszukać członka po imieniu, nazwisku albo e-mailu.
+9. Edytować dane członka.
+10. Dezaktywować członka i pokazać zmianę statusu na `inactive`.
+11. Pokazać typy broni.
+12. Pokazać broń oraz relację broni z typem broni.
+13. Pokazać wydarzenie.
+14. Dodać członka do wydarzenia przez formularz uczestników.
+15. Pokazać tabelę pośrednią `event_member` jako realizację relacji wiele-do-wielu.
+16. Pokazać składki członkowskie.
+17. Dodać nową składkę.
+18. Pokazać walidację kwoty składki przez wpisanie wartości mniejszej niż 0.
+19. Oznaczyć składkę jako opłaconą i pokazać ustawienie `status = paid` oraz `paid_at`.
+20. Uruchomić testy:
+
+```bash
+php artisan test
+```
