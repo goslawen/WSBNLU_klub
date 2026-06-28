@@ -3,7 +3,7 @@
 @section('title', 'Dodaj składkę - WSBNLU Klub')
 
 @section('content')
-    <h1 class="h3 mb-3">Dodaj</h1>
+    <h1 class="h3 mb-3">Dodaj składkę</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">Popraw błędy w formularzu.</div>
@@ -40,7 +40,7 @@
             <select name="status" id="status" class="form-select @error('status') is-invalid @enderror">
                 <option value="unpaid" @selected(old('status', 'unpaid') === 'unpaid')>nieopłacona</option>
                 <option value="paid" @selected(old('status') === 'paid')>opłacona</option>
-                <option value="cancelled" @selected(old('status') === 'cancelled')>anulowana</option>
+                <option value="cancelled" @selected(old('status') === 'cancelled')>anulowane</option>
             </select>
             @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>

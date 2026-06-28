@@ -37,7 +37,7 @@
                             <td>{{ $weapon->name }}</td>
                             <td>{{ $weapon->caliber }}</td>
                             <td>{{ $weapon->serial_number }}</td>
-                            <td>{{ $weapon->status }}</td>
+                            <td>@include('partials.status-badge', ['status' => $weapon->status])</td>
                         </tr>
                     @endforeach
                 </tbody>

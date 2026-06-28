@@ -25,7 +25,7 @@
         <dd class="col-sm-9">{{ $weapon->serial_number }}</dd>
 
         <dt class="col-sm-3">Status</dt>
-        <dd class="col-sm-9">{{ $weapon->status }}</dd>
+        <dd class="col-sm-9">@include('partials.status-badge', ['status' => $weapon->status])</dd>
     </dl>
 
     @if ($weapon->status !== 'inactive')

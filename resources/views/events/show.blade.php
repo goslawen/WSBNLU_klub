@@ -22,7 +22,7 @@
         <dd class="col-sm-9">{{ $event->location }}</dd>
 
         <dt class="col-sm-3">Status</dt>
-        <dd class="col-sm-9">{{ $event->status }}</dd>
+        <dd class="col-sm-9">@include('partials.status-badge', ['status' => $event->status])</dd>
 
         <dt class="col-sm-3">Opis</dt>
         <dd class="col-sm-9">{{ $event->description ?: '-' }}</dd>

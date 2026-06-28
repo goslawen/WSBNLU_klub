@@ -28,7 +28,7 @@
         <dd class="col-sm-9">{{ $member->joined_at->format('Y-m-d') }}</dd>
 
         <dt class="col-sm-3">Status</dt>
-        <dd class="col-sm-9">{{ $member->status === 'active' ? 'aktywny' : 'nieaktywny' }}</dd>
+        <dd class="col-sm-9">@include('partials.status-badge', ['status' => $member->status])</dd>
     </dl>
 
     @if ($member->status !== 'inactive')
