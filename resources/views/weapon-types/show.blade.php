@@ -1,17 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'PodglÄ…d typu broni - WSBNLU Klub')
+@section('title', 'Podgląd typu broni - WSBNLU Klub')
 
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    <div class="d-flex justify-content-between align-items-center mb-3">
+<div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h3 mb-0">{{ $weaponType->name }}</h1>
         <div class="d-flex gap-2">
             <a href="{{ route('weapon-types.edit', $weaponType) }}" class="btn btn-primary">Edytuj</a>
-            <a href="{{ route('weapon-types.index') }}" class="btn btn-outline-secondary">PowrĂłt</a>
+            <a href="{{ route('weapon-types.index') }}" class="btn btn-outline-secondary">Powrót</a>
         </div>
     </div>
 
@@ -23,7 +19,7 @@
         <dd class="col-sm-9">{{ $weaponType->description ?: '-' }}</dd>
     </dl>
 
-    <h2 class="h5 mt-4">BroĹ„ tego typu</h2>
+    <h2 class="h5 mt-4">Broń tego typu</h2>
     @if ($weaponType->weapons->isNotEmpty())
         <div class="table-responsive">
             <table class="table table-sm table-striped align-middle">
@@ -54,6 +50,6 @@
     <form method="POST" action="{{ route('weapon-types.destroy', $weaponType) }}" class="mt-3">
         @csrf
         @method('DELETE')
-        <button type="submit" class="btn btn-outline-danger">UsuĹ„ typ broni</button>
+        <button type="submit" class="btn btn-outline-danger">Usuń</button>
     </form>
 @endsection

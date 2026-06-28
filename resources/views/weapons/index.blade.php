@@ -1,18 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'BroĹ„ - WSBNLU Klub')
+@section('title', 'Broń - WSBNLU Klub')
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="h3 mb-0">BroĹ„</h1>
-        <a href="{{ route('weapons.create') }}" class="btn btn-primary">Dodaj broĹ„</a>
+        <h1 class="h3 mb-0">Broń</h1>
+        <a href="{{ route('weapons.create') }}" class="btn btn-primary">Dodaj</a>
     </div>
-
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    <div class="table-responsive">
+<div class="table-responsive">
         <table class="table table-striped align-middle">
             <thead>
                 <tr>
@@ -33,7 +28,7 @@
                         <td>{{ $weapon->serial_number }}</td>
                         <td>{{ $weapon->status }}</td>
                         <td class="text-end">
-                            <a href="{{ route('weapons.show', $weapon) }}" class="btn btn-sm btn-outline-secondary">PodglÄ…d</a>
+                            <a href="{{ route('weapons.show', $weapon) }}" class="btn btn-sm btn-outline-secondary">Pokaż</a>
                             <a href="{{ route('weapons.edit', $weapon) }}" class="btn btn-sm btn-outline-primary">Edytuj</a>
                             @if ($weapon->status !== 'inactive')
                                 <form method="POST" action="{{ route('weapons.deactivate', $weapon) }}" class="d-inline">
@@ -46,7 +41,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center text-muted">Brak broni do wyĹ›wietlenia.</td>
+                        <td colspan="6" class="text-center text-muted">Brak broni do wyświetlenia.</td>
                     </tr>
                 @endforelse
             </tbody>

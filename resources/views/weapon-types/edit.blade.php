@@ -6,7 +6,7 @@
     <h1 class="h3 mb-3">Edytuj typ broni</h1>
 
     @if ($errors->any())
-        <div class="alert alert-danger">Popraw bĹ‚Ä™dy w formularzu.</div>
+        <div class="alert alert-danger">Popraw błędy w formularzu.</div>
     @endif
 
     <form method="POST" action="{{ route('weapon-types.update', $weaponType) }}" class="row g-3">
@@ -26,7 +26,7 @@
         </div>
 
         <div class="col-12 d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+            <button type="submit" class="btn btn-primary">Zapisz</button>
             <a href="{{ route('weapon-types.show', $weaponType) }}" class="btn btn-outline-secondary">Anuluj</a>
         </div>
     </form>

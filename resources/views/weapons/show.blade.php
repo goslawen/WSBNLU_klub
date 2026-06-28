@@ -1,17 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'PodglÄ…d broni - WSBNLU Klub')
+@section('title', 'Podgląd broni - WSBNLU Klub')
 
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    <div class="d-flex justify-content-between align-items-center mb-3">
+<div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h3 mb-0">{{ $weapon->name }}</h1>
         <div class="d-flex gap-2">
             <a href="{{ route('weapons.edit', $weapon) }}" class="btn btn-primary">Edytuj</a>
-            <a href="{{ route('weapons.index') }}" class="btn btn-outline-secondary">PowrĂłt</a>
+            <a href="{{ route('weapons.index') }}" class="btn btn-outline-secondary">Powrót</a>
         </div>
     </div>
 
@@ -36,7 +32,7 @@
         <form method="POST" action="{{ route('weapons.deactivate', $weapon) }}">
             @csrf
             @method('PATCH')
-            <button type="submit" class="btn btn-outline-danger">Dezaktywuj broĹ„</button>
+            <button type="submit" class="btn btn-outline-danger">Dezaktywuj</button>
         </form>
     @endif
 @endsection

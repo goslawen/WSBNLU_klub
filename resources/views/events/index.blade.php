@@ -5,14 +5,9 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h3 mb-0">Wydarzenia</h1>
-        <a href="{{ route('events.create') }}" class="btn btn-primary">Dodaj wydarzenie</a>
+        <a href="{{ route('events.create') }}" class="btn btn-primary">Dodaj</a>
     </div>
-
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    <div class="table-responsive">
+<div class="table-responsive">
         <table class="table table-striped align-middle">
             <thead>
                 <tr>
@@ -31,7 +26,7 @@
                         <td>{{ $event->location }}</td>
                         <td>{{ $event->status }}</td>
                         <td class="text-end">
-                            <a href="{{ route('events.show', $event) }}" class="btn btn-sm btn-outline-secondary">PodglÄ…d</a>
+                            <a href="{{ route('events.show', $event) }}" class="btn btn-sm btn-outline-secondary">Pokaż</a>
                             <a href="{{ route('events.edit', $event) }}" class="btn btn-sm btn-outline-primary">Edytuj</a>
                             @if ($event->status !== 'cancelled')
                                 <form method="POST" action="{{ route('events.destroy', $event) }}" class="d-inline">
@@ -44,7 +39,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-center text-muted">Brak wydarzeĹ„ do wyĹ›wietlenia.</td>
+                        <td colspan="5" class="text-center text-muted">Brak wydarzeń do wyświetlenia.</td>
                     </tr>
                 @endforelse
             </tbody>

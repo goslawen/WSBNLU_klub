@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Edytuj skĹ‚adkÄ™ - WSBNLU Klub')
+@section('title', 'Edytuj składkę - WSBNLU Klub')
 
 @section('content')
-    <h1 class="h3 mb-3">Edytuj skĹ‚adkÄ™</h1>
+    <h1 class="h3 mb-3">Edytuj składkę</h1>
 
     @if ($errors->any())
-        <div class="alert alert-danger">Popraw bĹ‚Ä™dy w formularzu.</div>
+        <div class="alert alert-danger">Popraw błędy w formularzu.</div>
     @endif
 
     <form method="POST" action="{{ route('fees.update', $fee) }}" class="row g-3">
@@ -14,9 +14,9 @@
         @method('PUT')
 
         <div class="col-md-6">
-            <label for="member_id" class="form-label">CzĹ‚onek</label>
+            <label for="member_id" class="form-label">Członek</label>
             <select name="member_id" id="member_id" class="form-select @error('member_id') is-invalid @enderror">
-                <option value="">Wybierz czĹ‚onka</option>
+                <option value="">Wybierz członka</option>
                 @foreach ($members as $member)
                     <option value="{{ $member->id }}" @selected((string) old('member_id', $fee->member_id) === (string) $member->id)>{{ $member->last_name }} {{ $member->first_name }} ({{ $member->email }})</option>
                 @endforeach
@@ -39,21 +39,21 @@
         <div class="col-md-6">
             <label for="status" class="form-label">Status</label>
             <select name="status" id="status" class="form-select @error('status') is-invalid @enderror">
-                <option value="unpaid" @selected(old('status', $fee->status) === 'unpaid')>nieopĹ‚acona</option>
-                <option value="paid" @selected(old('status', $fee->status) === 'paid')>opĹ‚acona</option>
+                <option value="unpaid" @selected(old('status', $fee->status) === 'unpaid')>nieopłacona</option>
+                <option value="paid" @selected(old('status', $fee->status) === 'paid')>opłacona</option>
                 <option value="cancelled" @selected(old('status', $fee->status) === 'cancelled')>anulowana</option>
             </select>
             @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
 
         <div class="col-md-6">
-            <label for="paid_at" class="form-label">Data opĹ‚acenia</label>
+            <label for="paid_at" class="form-label">Data opłacenia</label>
             <input type="date" name="paid_at" id="paid_at" value="{{ old('paid_at', $fee->paid_at?->format('Y-m-d')) }}" class="form-control @error('paid_at') is-invalid @enderror">
             @error('paid_at')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
 
         <div class="col-12 d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+            <button type="submit" class="btn btn-primary">Zapisz</button>
             <a href="{{ route('fees.show', $fee) }}" class="btn btn-outline-secondary">Anuluj</a>
         </div>
     </form>
