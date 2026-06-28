@@ -16,7 +16,7 @@
         <dd class="col-sm-9">{{ $event->name }}</dd>
 
         <dt class="col-sm-3">Data</dt>
-        <dd class="col-sm-9">{{ $event->event_date->format('Y-m-d') }}</dd>
+        <dd class="col-sm-9">{{ $event->event_date->format('d.m.Y') }}</dd>
 
         <dt class="col-sm-3">Miejsce</dt>
         <dd class="col-sm-9">{{ $event->location }}</dd>

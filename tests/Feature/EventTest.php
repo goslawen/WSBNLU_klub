@@ -15,7 +15,7 @@ class EventTest extends TestCase
     {
         Event::create([
             'name' => 'Trening klubowy',
-            'event_date' => '2026-04-10',
+            'event_date' => '2026-03-20',
             'location' => 'Strzelnica miejska',
             'status' => 'planned',
         ]);
@@ -24,6 +24,7 @@ class EventTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('Trening klubowy');
+        $response->assertSee('20.03.2026');
     }
 
     public function test_event_can_be_created(): void
