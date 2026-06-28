@@ -19,7 +19,7 @@ class ClubCrudTest extends TestCase
         $response = $this->get(route('home'));
 
         $response->assertOk();
-        $response->assertSee('Aplikacja');
+        $response->assertSee('Klub strzelecko-kolekcjonerski WSB-NLU');
     }
 
     public function test_members_list_works(): void

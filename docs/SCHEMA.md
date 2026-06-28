@@ -204,7 +204,7 @@ Przy edycji rekordów reguły unikalności ignorują aktualnie edytowany rekord.
 ## Co pokazać na obronie
 
 1. Uruchomić aplikację i wejść na stronę główną.
-2. Otworzyć stronę `Mapa projektu` i omówić moduły, tabele i relacje.
+2. Otworzyć plik `docs/SCHEMA.md` i omówić moduły, tabele i relacje.
 3. Pokazać migracje w katalogu `database/migrations`.
 4. Pokazać modele Eloquent i metody relacji.
 5. Otworzyć listę członków i dodać nowego członka.
