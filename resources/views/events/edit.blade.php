@@ -6,7 +6,7 @@
     <h1 class="h3 mb-3">Edytuj wydarzenie</h1>
 
     @if ($errors->any())
-        <div class="alert alert-danger">Popraw bĹ‚Ä™dy w formularzu.</div>
+        <div class="alert alert-danger">Popraw błędy w formularzu.</div>
     @endif
 
     <form method="POST" action="{{ route('events.update', $event) }}" class="row g-3">
@@ -35,7 +35,7 @@
             <label for="status" class="form-label">Status</label>
             <select name="status" id="status" class="form-select @error('status') is-invalid @enderror">
                 <option value="planned" @selected(old('status', $event->status) === 'planned')>planowane</option>
-                <option value="completed" @selected(old('status', $event->status) === 'completed')>zakoĹ„czone</option>
+                <option value="completed" @selected(old('status', $event->status) === 'completed')>zakończone</option>
                 <option value="cancelled" @selected(old('status', $event->status) === 'cancelled')>anulowane</option>
             </select>
             @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -48,7 +48,7 @@
         </div>
 
         <div class="col-12 d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+            <button type="submit" class="btn btn-primary">Zapisz</button>
             <a href="{{ route('events.show', $event) }}" class="btn btn-outline-secondary">Anuluj</a>
         </div>
     </form>

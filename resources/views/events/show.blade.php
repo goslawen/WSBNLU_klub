@@ -1,17 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'PodglÄ…d wydarzenia - WSBNLU Klub')
+@section('title', 'Podgląd wydarzenia - WSBNLU Klub')
 
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    <div class="d-flex justify-content-between align-items-center mb-3">
+<div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h3 mb-0">{{ $event->name }}</h1>
         <div class="d-flex gap-2">
             <a href="{{ route('events.edit', $event) }}" class="btn btn-primary">Edytuj</a>
-            <a href="{{ route('events.index') }}" class="btn btn-outline-secondary">PowrĂłt</a>
+            <a href="{{ route('events.index') }}" class="btn btn-outline-secondary">Powrót</a>
         </div>
     </div>
 
@@ -36,7 +32,7 @@
         <form method="POST" action="{{ route('events.destroy', $event) }}" class="mb-4">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-outline-danger">Anuluj wydarzenie</button>
+            <button type="submit" class="btn btn-outline-danger">Anuluj</button>
         </form>
     @endif
 
@@ -50,7 +46,7 @@
         @csrf
         <div class="col-md-8">
             <select name="member_id" class="form-select @error('member_id') is-invalid @enderror">
-                <option value="">Wybierz czĹ‚onka</option>
+                <option value="">Wybierz członka</option>
                 @foreach ($availableMembers as $member)
                     <option value="{{ $member->id }}" @selected((string) old('member_id') === (string) $member->id)>{{ $member->last_name }} {{ $member->first_name }} ({{ $member->email }})</option>
                 @endforeach
@@ -58,7 +54,7 @@
             @error('member_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
         <div class="col-md-4">
-            <button type="submit" class="btn btn-primary">Dodaj uczestnika</button>
+            <button type="submit" class="btn btn-primary">Dodaj</button>
         </div>
     </form>
 
@@ -66,7 +62,7 @@
         <table class="table table-sm table-striped align-middle">
             <thead>
                 <tr>
-                    <th>ImiÄ™</th>
+                    <th>Imię</th>
                     <th>Nazwisko</th>
                     <th>E-mail</th>
                     <th class="text-end">Akcje</th>
@@ -82,13 +78,13 @@
                             <form method="POST" action="{{ route('events.members.destroy', [$event, $member]) }}" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-danger">UsuĹ„</button>
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Usuń</button>
                             </form>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4" class="text-center text-muted">Brak uczestnikĂłw wydarzenia.</td>
+                        <td colspan="4" class="text-center text-muted">Brak uczestników wydarzenia.</td>
                     </tr>
                 @endforelse
             </tbody>

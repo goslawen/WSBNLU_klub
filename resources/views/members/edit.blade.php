@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Edytuj czĹ‚onka - WSBNLU Klub')
+@section('title', 'Edytuj członka - WSBNLU Klub')
 
 @section('content')
-    <h1 class="h3 mb-3">Edytuj czĹ‚onka</h1>
+    <h1 class="h3 mb-3">Edytuj członka</h1>
 
     @if ($errors->any())
-        <div class="alert alert-danger">Popraw bĹ‚Ä™dy w formularzu.</div>
+        <div class="alert alert-danger">Popraw błędy w formularzu.</div>
     @endif
 
     <form method="POST" action="{{ route('members.update', $member) }}" class="row g-3">
@@ -14,7 +14,7 @@
         @method('PUT')
 
         <div class="col-md-6">
-            <label for="first_name" class="form-label">ImiÄ™</label>
+            <label for="first_name" class="form-label">Imię</label>
             <input type="text" name="first_name" id="first_name" value="{{ old('first_name', $member->first_name) }}" class="form-control @error('first_name') is-invalid @enderror">
             @error('first_name')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="col-md-6">
-            <label for="joined_at" class="form-label">Data doĹ‚Ä…czenia</label>
+            <label for="joined_at" class="form-label">Data dołączenia</label>
             <input type="date" name="joined_at" id="joined_at" value="{{ old('joined_at', $member->joined_at->format('Y-m-d')) }}" class="form-control @error('joined_at') is-invalid @enderror">
             @error('joined_at')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
@@ -53,7 +53,7 @@
         </div>
 
         <div class="col-12 d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+            <button type="submit" class="btn btn-primary">Zapisz</button>
             <a href="{{ route('members.show', $member) }}" class="btn btn-outline-secondary">Anuluj</a>
         </div>
     </form>

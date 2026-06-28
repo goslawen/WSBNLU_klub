@@ -1,26 +1,21 @@
 @extends('layouts.app')
 
-@section('title', 'SkĹ‚adki - WSBNLU Klub')
+@section('title', 'Składki - WSBNLU Klub')
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="h3 mb-0">SkĹ‚adki</h1>
-        <a href="{{ route('fees.create') }}" class="btn btn-primary">Dodaj skĹ‚adkÄ™</a>
+        <h1 class="h3 mb-0">Składki</h1>
+        <a href="{{ route('fees.create') }}" class="btn btn-primary">Dodaj</a>
     </div>
-
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    <div class="table-responsive">
+<div class="table-responsive">
         <table class="table table-striped align-middle">
             <thead>
                 <tr>
-                    <th>CzĹ‚onek</th>
+                    <th>Członek</th>
                     <th>Rok</th>
                     <th>Kwota</th>
                     <th>Status</th>
-                    <th>Data opĹ‚acenia</th>
+                    <th>Data opłacenia</th>
                     <th class="text-end">Akcje</th>
                 </tr>
             </thead>
@@ -29,17 +24,17 @@
                     <tr>
                         <td>{{ $fee->member->first_name }} {{ $fee->member->last_name }}</td>
                         <td>{{ $fee->year }}</td>
-                        <td>{{ number_format((float) $fee->amount, 2, ',', ' ') }} zĹ‚</td>
+                        <td>{{ number_format((float) $fee->amount, 2, ',', ' ') }} zł</td>
                         <td>{{ $fee->status }}</td>
                         <td>{{ $fee->paid_at?->format('Y-m-d') ?: '-' }}</td>
                         <td class="text-end">
-                            <a href="{{ route('fees.show', $fee) }}" class="btn btn-sm btn-outline-secondary">PodglÄ…d</a>
+                            <a href="{{ route('fees.show', $fee) }}" class="btn btn-sm btn-outline-secondary">Pokaż</a>
                             <a href="{{ route('fees.edit', $fee) }}" class="btn btn-sm btn-outline-primary">Edytuj</a>
                             @if ($fee->status !== 'paid')
                                 <form method="POST" action="{{ route('fees.mark-paid', $fee) }}" class="d-inline">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit" class="btn btn-sm btn-outline-success">OpĹ‚acona</button>
+                                    <button type="submit" class="btn btn-sm btn-outline-success">Oznacz jako opłacone</button>
                                 </form>
                             @endif
                             @if ($fee->status !== 'cancelled')
@@ -53,7 +48,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center text-muted">Brak skĹ‚adek do wyĹ›wietlenia.</td>
+                        <td colspan="6" class="text-center text-muted">Brak składek do wyświetlenia.</td>
                     </tr>
                 @endforelse
             </tbody>

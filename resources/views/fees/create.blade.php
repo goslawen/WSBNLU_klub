@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
-@section('title', 'Dodaj skĹ‚adkÄ™ - WSBNLU Klub')
+@section('title', 'Dodaj składkę - WSBNLU Klub')
 
 @section('content')
-    <h1 class="h3 mb-3">Dodaj skĹ‚adkÄ™</h1>
+    <h1 class="h3 mb-3">Dodaj</h1>
 
     @if ($errors->any())
-        <div class="alert alert-danger">Popraw bĹ‚Ä™dy w formularzu.</div>
+        <div class="alert alert-danger">Popraw błędy w formularzu.</div>
     @endif
 
     <form method="POST" action="{{ route('fees.store') }}" class="row g-3">
         @csrf
 
         <div class="col-md-6">
-            <label for="member_id" class="form-label">CzĹ‚onek</label>
+            <label for="member_id" class="form-label">Członek</label>
             <select name="member_id" id="member_id" class="form-select @error('member_id') is-invalid @enderror">
-                <option value="">Wybierz czĹ‚onka</option>
+                <option value="">Wybierz członka</option>
                 @foreach ($members as $member)
                     <option value="{{ $member->id }}" @selected((string) old('member_id') === (string) $member->id)>{{ $member->last_name }} {{ $member->first_name }} ({{ $member->email }})</option>
                 @endforeach
@@ -38,15 +38,15 @@
         <div class="col-md-6">
             <label for="status" class="form-label">Status</label>
             <select name="status" id="status" class="form-select @error('status') is-invalid @enderror">
-                <option value="unpaid" @selected(old('status', 'unpaid') === 'unpaid')>nieopĹ‚acona</option>
-                <option value="paid" @selected(old('status') === 'paid')>opĹ‚acona</option>
+                <option value="unpaid" @selected(old('status', 'unpaid') === 'unpaid')>nieopłacona</option>
+                <option value="paid" @selected(old('status') === 'paid')>opłacona</option>
                 <option value="cancelled" @selected(old('status') === 'cancelled')>anulowana</option>
             </select>
             @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
 
         <div class="col-md-6">
-            <label for="paid_at" class="form-label">Data opĹ‚acenia</label>
+            <label for="paid_at" class="form-label">Data opłacenia</label>
             <input type="date" name="paid_at" id="paid_at" value="{{ old('paid_at') }}" class="form-control @error('paid_at') is-invalid @enderror">
             @error('paid_at')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>

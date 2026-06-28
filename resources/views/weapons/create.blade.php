@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Dodaj broĹ„ - WSBNLU Klub')
+@section('title', 'Dodaj broń - WSBNLU Klub')
 
 @section('content')
-    <h1 class="h3 mb-3">Dodaj broĹ„</h1>
+    <h1 class="h3 mb-3">Dodaj</h1>
 
     @if ($errors->any())
-        <div class="alert alert-danger">Popraw bĹ‚Ä™dy w formularzu.</div>
+        <div class="alert alert-danger">Popraw błędy w formularzu.</div>
     @endif
 
     <form method="POST" action="{{ route('weapons.store') }}" class="row g-3">
@@ -44,7 +44,7 @@
         <div class="col-md-6">
             <label for="status" class="form-label">Status</label>
             <select name="status" id="status" class="form-select @error('status') is-invalid @enderror">
-                <option value="available" @selected(old('status', 'available') === 'available')>dostÄ™pna</option>
+                <option value="available" @selected(old('status', 'available') === 'available')>dostępna</option>
                 <option value="assigned" @selected(old('status') === 'assigned')>przypisana</option>
                 <option value="inactive" @selected(old('status') === 'inactive')>nieaktywna</option>
             </select>

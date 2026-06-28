@@ -5,14 +5,9 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h3 mb-0">Typy broni</h1>
-        <a href="{{ route('weapon-types.create') }}" class="btn btn-primary">Dodaj typ broni</a>
+        <a href="{{ route('weapon-types.create') }}" class="btn btn-primary">Dodaj</a>
     </div>
-
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    <div class="table-responsive">
+<div class="table-responsive">
         <table class="table table-striped align-middle">
             <thead>
                 <tr>
@@ -27,18 +22,18 @@
                         <td>{{ $weaponType->name }}</td>
                         <td>{{ $weaponType->description ?: '-' }}</td>
                         <td class="text-end">
-                            <a href="{{ route('weapon-types.show', $weaponType) }}" class="btn btn-sm btn-outline-secondary">PodglÄ…d</a>
+                            <a href="{{ route('weapon-types.show', $weaponType) }}" class="btn btn-sm btn-outline-secondary">Pokaż</a>
                             <a href="{{ route('weapon-types.edit', $weaponType) }}" class="btn btn-sm btn-outline-primary">Edytuj</a>
                             <form method="POST" action="{{ route('weapon-types.destroy', $weaponType) }}" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-danger">UsuĹ„</button>
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Usuń</button>
                             </form>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3" class="text-center text-muted">Brak typĂłw broni do wyĹ›wietlenia.</td>
+                        <td colspan="3" class="text-center text-muted">Brak typów broni do wyświetlenia.</td>
                     </tr>
                 @endforelse
             </tbody>

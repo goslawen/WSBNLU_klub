@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Edytuj broĹ„ - WSBNLU Klub')
+@section('title', 'Edytuj broń - WSBNLU Klub')
 
 @section('content')
-    <h1 class="h3 mb-3">Edytuj broĹ„</h1>
+    <h1 class="h3 mb-3">Edytuj broń</h1>
 
     @if ($errors->any())
-        <div class="alert alert-danger">Popraw bĹ‚Ä™dy w formularzu.</div>
+        <div class="alert alert-danger">Popraw błędy w formularzu.</div>
     @endif
 
     <form method="POST" action="{{ route('weapons.update', $weapon) }}" class="row g-3">
@@ -45,7 +45,7 @@
         <div class="col-md-6">
             <label for="status" class="form-label">Status</label>
             <select name="status" id="status" class="form-select @error('status') is-invalid @enderror">
-                <option value="available" @selected(old('status', $weapon->status) === 'available')>dostÄ™pna</option>
+                <option value="available" @selected(old('status', $weapon->status) === 'available')>dostępna</option>
                 <option value="assigned" @selected(old('status', $weapon->status) === 'assigned')>przypisana</option>
                 <option value="inactive" @selected(old('status', $weapon->status) === 'inactive')>nieaktywna</option>
             </select>
@@ -53,7 +53,7 @@
         </div>
 
         <div class="col-12 d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+            <button type="submit" class="btn btn-primary">Zapisz</button>
             <a href="{{ route('weapons.show', $weapon) }}" class="btn btn-outline-secondary">Anuluj</a>
         </div>
     </form>

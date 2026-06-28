@@ -3,10 +3,10 @@
 @section('title', 'Dodaj wydarzenie - WSBNLU Klub')
 
 @section('content')
-    <h1 class="h3 mb-3">Dodaj wydarzenie</h1>
+    <h1 class="h3 mb-3">Dodaj</h1>
 
     @if ($errors->any())
-        <div class="alert alert-danger">Popraw bĹ‚Ä™dy w formularzu.</div>
+        <div class="alert alert-danger">Popraw błędy w formularzu.</div>
     @endif
 
     <form method="POST" action="{{ route('events.store') }}" class="row g-3">
@@ -34,7 +34,7 @@
             <label for="status" class="form-label">Status</label>
             <select name="status" id="status" class="form-select @error('status') is-invalid @enderror">
                 <option value="planned" @selected(old('status', 'planned') === 'planned')>planowane</option>
-                <option value="completed" @selected(old('status') === 'completed')>zakoĹ„czone</option>
+                <option value="completed" @selected(old('status') === 'completed')>zakończone</option>
                 <option value="cancelled" @selected(old('status') === 'cancelled')>anulowane</option>
             </select>
             @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
