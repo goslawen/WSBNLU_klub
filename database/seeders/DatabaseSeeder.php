@@ -127,14 +127,14 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Trening pistoletowy',
                 'event_date' => '2026-04-12',
                 'location' => 'Strzelnica miejska, stanowiska 1-5',
-                'description' => 'Podstawowy trening celnoĹ›ci z broni krĂłtkiej.',
+                'description' => 'Podstawowy trening celności z broni krótkiej.',
                 'status' => 'planned',
             ],
             [
                 'name' => 'Zawody klubowe w karabinie',
                 'event_date' => '2026-03-02',
                 'location' => 'Strzelnica 50 m',
-                'description' => 'WewnÄ™trzne zawody klubowe dla czĹ‚onkĂłw.',
+                'description' => 'Wewnętrzne zawody klubowe dla członków.',
                 'status' => 'completed',
             ],
             [
